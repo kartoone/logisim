@@ -1,0 +1,28 @@
+cache terminoloy
+  block size: the exact number of bytes loaded into the cache from RAM upon a cache miss
+  cache miss: the data being accessed by the program is NOT in the cache
+  cache hit: the data being accessed by the program IS in the cache
+
+example:
+    for (i = 0; i < len; i++) {
+        sum += array[i];
+    }
+
+When i==0 (i.e., the first loop iteration), array[0] is likely to be a cache miss.
+If the block size is 16, then array[1], array[2], and array[3] will all be cache hits.
+Continuing on, array[4] is likely a miss, followed by hits on array[5, 6, and 7]
+
+Direct-mapped cache ... the "cache line" (i.e., the spot where the block goes in the cache is directly in the memory address)
+
+salmon: 0b00000000 0x00
+yellow: 0b00100000 0x20
+green:  0b01000000 0x40
+blue:   0b01100000 0x60
+salmon: 0b10000000 0x80
+yellow: 0b10100000 0xA0
+green:  0b11000000 0xC0
+blue:   0b11100000 0xE0
+
+cache line/index: the bits of the memory address that determine which location in the cache that memory address belongs to
+
+cache tag: the remaining bits to the left of the index (i.e., higher order bits) that uniquely identify that block 

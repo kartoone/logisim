@@ -1,0 +1,7 @@
+loadi %1, $0x0 # "i" from a for loop
+loadi %2, $0x1 # "+1"
+loadi %3, $0xA
+loop: add %1, %1, %2 # i = i + 1
+cmp %1, %3           # i!=10
+jne loop            
+...
