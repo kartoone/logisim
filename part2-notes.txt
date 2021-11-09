@@ -1,6 +1,6 @@
 opcode is 4 bits to support up to 16 instructions ... here is the opcodes we need:
 
-Register ALU instructions
+Register ALU instruction opcodes
 0000 - add
 0001 - sub
 0010 - and
@@ -8,29 +8,32 @@ Register ALU instructions
 0100 - nand
 0101 - nor
 0110 - cmp
-Example:
-000  0011 000 011 001 - or $0, $3, $1
-unsd op   rd  rs  rt
+
+Example ALU instructions (all ALU instructions have the form below but use different opcodes as listed above):
+000  0011 000 011 001 - or %0, %3, %1
+unsd op   rd  rs  rt
 
 Register immediate instruction
 1000 - loadi (load immediate)
-Example:
-000  1000 000 011001 - li $0, 0x19
-unsd op   rd  imm (6 bits)
+Example loadi instruction:
+000  1000 000 011001 - loadi %0, $0x19
+unsd op   rd  imm (6 bits)
 
 Push/pop instructions
 1100 - push
 1101 - pop
-Examples:
-000  1100 000000 100 - push $4
-000  1101 000000 011 - pop $3
-unsd op   unsd   reg
+Example push instruction:
+000  1100 000000 100 - push %4
+unsd op   unsd   rt
+Example pop instruction:
+000  1101 011 000000 - pop %3
+unsd op   rd  unsd
 
 Jump instructions
 1001 - j
 1010 - je
 1011 - jne
 Examples:
-000  1001  0   00000004 - j exit (where exit is four instructions after this one)
-000  1001  0   fffffffe - j loop (where loop is two instructions before this one ... fffffffe is -2 two's complement)
-unsd op   unsd label (8 bits)
+000  1001  0   00000100 - j exit (where exit is four instructions after this one)
+000  1001  0   11111110 - j loop (where loop is two instructions before this one ... fffffffe is -2 two's complement)
+unsd op   unsd label (8 bits)
