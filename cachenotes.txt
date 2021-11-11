@@ -15,13 +15,13 @@ Continuing on, array[4] is likely a miss, followed by hits on array[5, 6, and 7]
 Direct-mapped cache ... the "cache line" (i.e., the spot where the block goes in the cache is directly in the memory address)
 
 salmon: 0b00000000 0x00
-yellow: 0b00100000 0x20
-green:  0b01000000 0x40
-blue:   0b01100000 0x60
-salmon: 0b10000000 0x80
-yellow: 0b10100000 0xA0
-green:  0b11000000 0xC0
-blue:   0b11100000 0xE0
+yellow: 0b00010000 0x10
+green:  0b00100000 0x20
+blue:   0b00110000 0x30
+salmon: 0b01000000 0x40
+yellow: 0b01010000 0x50
+green:  0b01100000 0x60
+blue:   0b01110000 0x70
 
 cache line/index: the bits of the memory address that determine which location in the cache that memory address belongs to
 
