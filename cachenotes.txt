@@ -34,3 +34,16 @@ blue:   0b0000000011110000 0x70
 cache line/index: the bits of the memory address that determine which location in the cache that memory address belongs to
 
 cache tag: the remaining bits to the left of the index (i.e., higher order bits) that uniquely identify that block 
+
+LOGISIM IMPLEMENTATION NOTES:
+
+1. Two modes ... "HIT" vs "MISS"
+2. If "HIT" then retrieve the data from the cache and send it out along with the "ready bit" set
+3. If "MISS" then start counting 16 times to retrieve the entire block from RAM and load it into the cache
+   a. Note the introduction of the new register to track the "mode" .. when we are in the "service miss" mode, we don't want to increment the miss counter again and we want to make sure to start incrementing the byte counter to start retrieving all the bytes of the block
+   b. Note that we don't want the clock to start counting until after we have detected the miss and set the mode
+   c. This means that we have to set the "rising edge" / "falling edge" very carefully for all the state elements in our circuit as follows:
+           HitCounter and MissCounter should both be "falling edge"
+           The new "mode" register named "SM" which stands for "service miss" should be falling edge
+           The shift register should be falling edge
+           But the ByteCounter itself should be "rising edge"
